@@ -107,6 +107,8 @@ def generate_args(access_key, secret_key, session_token, region):
     random.shuffle(service_names)
 
     for service_name in service_names:
+        logger = logging.getLogger()
+        logger.info("Testing service: %s", service_name)
         actions = list(BRUTEFORCE_TESTS[service_name])
         random.shuffle(actions)
 
@@ -216,7 +218,7 @@ def enumerate_iam(access_key, secret_key, session_token, region):
     output = dict()
     configure_logging()
 
-    output['iam'] = enumerate_using_iam(access_key, secret_key, session_token, region)
+    # output['iam'] = enumerate_using_iam(access_key, secret_key, session_token, region)
     output['bruteforce'] = enumerate_using_bruteforce(access_key, secret_key, session_token, region)
 
     return output
